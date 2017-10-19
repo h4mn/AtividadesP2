@@ -25,9 +25,9 @@ struct embarcacoes
 
 struct campos
 {
-    char navios[1][10][40];
-    char ataques[1][10][40];
-} campo;
+    char navios[1][10][44];
+    char ataques[1][10][44];
+};
 
 struct jogadores
 {
@@ -48,11 +48,7 @@ struct infos
     char titulo[30];
     char tela[15];
     char status[30];
-    char linha_1[80];
-    char linha_2[80];
-    char linha_3[80];
-    char linha_4[80];
-    char linha_5[80];
+    char linha[25][80];
     int selecionado;
 } info;
 
@@ -73,9 +69,9 @@ void desenharTela();
 int capturarMenu();
 int definirCampos();
 
-struct campo marcarNavios();
 struct jogadores jogadorAtual;
 struct embarcacoes navios[5];
+struct campos campo;
 int menuPosicao;
 int menuSelecionado;
 int telaAtual;
@@ -118,6 +114,8 @@ void desenharTela (int tela, int posicao, int instrucao, struct campos campo[])
     char *linha_3;
     char *linha_4;
     char *linha_5;
+    char linha_prepara[25][80];
+    int linha, coluna;
 
     // code
     switch (tela)
@@ -238,6 +236,33 @@ void desenharTela (int tela, int posicao, int instrucao, struct campos campo[])
             linha_1 = "Digite o Navio a ser colocado";
             break;
         }
+        char linha_prepara[][80] = {
+            "BATALHA NAVAL - Preparação                                 Blocos restantes: 30\n",
+            "=============================================|=================================\n",
+        };
+
+        // bloco que imprime o vetor em formato de tabuleiro
+        printf("\n");
+        printf("  ");
+        for (coluna=0; coluna<10; coluna++)
+        {
+            printf("  %d ", coluna);
+        }
+        printf("\n");
+        for (linha=0; linha<10; linha++)
+        {
+            printf("  -----------------------------------------\n");
+            printf("%d ", linha);
+            for (coluna=0; coluna<10; coluna++)
+            {
+                printf("| %c ", campo.navios[jogadorAtual.jogador_id][linha][coluna]);
+            }
+            printf("|\n");
+        }
+        printf("  -----------------------------------------\n");
+        system("pause");
+        break;
+
         system("cls");
         printf("BATALHA NAVAL - Preparação                                 Blocos restantes: 30\n");
         printf("=============================================|=================================\n");
@@ -351,6 +376,16 @@ int definirCampos()
         desenharTela(2, 0, 0, NULL);
         scanf("%s", jogadorAtual.nome);
 
+        //Prepara Campo
+        //E adiciona para todos o caracter ~
+        for (linha=0; linha<10; linha++)
+        {
+            for (coluna=0; coluna<10; coluna++)
+            {
+                campo.navios[jogadorAtual.jogador_id][linha][coluna] = CMAR;
+            }
+        }
+
         //Calcula quantidade de blocos por navios
         for (i=0; i<5; i++) {
             navios[i].colocados[jogadorAtual.jogador_id] = navios[i].tamanho;
@@ -374,37 +409,6 @@ int definirCampos()
                 printf("%c", navioEscolhido);
             }
         }
-
-        //Prepara Campo
-        //E adiciona para todos o caracter ~
-        for (linha=0; linha<10; linha++)
-        {
-            for (coluna=0; coluna<10; coluna++)
-            {
-                campo.navios[jogadorAtual.jogador_id][linha][coluna] = CMAR;
-            }
-        }
-
-        // bloco que imprime o vetor em formato de tabuleiro
-        printf("\n");
-        printf("  ");
-        for (coluna=0; coluna<10; coluna++)
-        {
-            printf("  %d ", coluna);
-        }
-        printf("\n");
-        for (linha=0; linha<10; linha++)
-        {
-            printf("  -----------------------------------------\n");
-            printf("%d ", linha);
-            for (coluna=0; coluna<10; coluna++)
-            {
-                printf("| %c ", campo.navios[jogadorAtual.jogador_id][linha][coluna]);
-            }
-            printf("|\n");
-        }
-        printf("  -----------------------------------------\n");
-        system("pause");
 
         //Coleta posições dos navios
         while (jogadorAtual.blocosRestantes > 0)
