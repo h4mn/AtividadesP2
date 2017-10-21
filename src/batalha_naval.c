@@ -23,11 +23,11 @@ struct embarcacoes
     int quantidade;
 };
 
-struct campos
+struct
 {
     char navios[1][10][44];
     char ataques[1][10][44];
-};
+} campo;
 
 struct jogadores
 {
@@ -71,7 +71,7 @@ int definirCampos();
 
 struct jogadores jogadorAtual;
 struct embarcacoes navios[5];
-struct campos campo;
+//struct campos campo;
 int menuPosicao;
 int menuSelecionado;
 int telaAtual;
@@ -106,7 +106,7 @@ int batalha_naval()
 /*
 * Função desenharTela
 */
-void desenharTela (int tela, int posicao, int instrucao, struct campos campo[])
+void desenharTela (int tela, int posicao, int instrucao)
 {
     //int i;
     char *linha_1;
@@ -236,14 +236,28 @@ void desenharTela (int tela, int posicao, int instrucao, struct campos campo[])
             linha_1 = "Digite o Navio a ser colocado";
             break;
         }
+
+        // Início da composição da tela 3
+        // ==============================
+        //
+        system("cls");
         char linha_prepara[][80] = {
-            "BATALHA NAVAL - Preparação                                 Blocos restantes: 30\n",
-            "=============================================|=================================\n",
+            "BATALHA NAVAL - Preparação                                 Blocos restantes: 30 ",
+            "=============================================|==================================",
+            "  ",
         };
 
-        // bloco que imprime o vetor em formato de tabuleiro
-        printf("\n");
-        printf("  ");
+        // INICIO - bloco que imprime o vetor em formato de tabuleiro
+        //strcat(linha_prepara[2], "  indice 2");
+
+        for (linha = 0; linha < 25; linha++)
+        {
+            printf("%s", linha_prepara[linha]);
+            printf("\n");
+        }
+        // FIM - bloco que imprime o vetor em formato de tabuleiro
+        printf("Fim \n");
+
         for (coluna=0; coluna<10; coluna++)
         {
             printf("  %d ", coluna);
@@ -251,7 +265,12 @@ void desenharTela (int tela, int posicao, int instrucao, struct campos campo[])
         printf("\n");
         for (linha=0; linha<10; linha++)
         {
-            printf("  -----------------------------------------\n");
+            if (linha == 0)
+            {
+                printf("  -----------------------------------------\n");
+            } else {
+                printf("  |---|---|---|---|---|---|---|---|---|---|\n");
+            }
             printf("%d ", linha);
             for (coluna=0; coluna<10; coluna++)
             {
@@ -260,8 +279,12 @@ void desenharTela (int tela, int posicao, int instrucao, struct campos campo[])
             printf("|\n");
         }
         printf("  -----------------------------------------\n");
+
         system("pause");
         break;
+        //
+        // ==============================
+        // FIM da composição da tela 3
 
         system("cls");
         printf("BATALHA NAVAL - Preparação                                 Blocos restantes: 30\n");
@@ -269,7 +292,7 @@ void desenharTela (int tela, int posicao, int instrucao, struct campos campo[])
         printf("    0   1   2   3   4   5   6   7   8   9    |                                 \n");
         printf("  -----------------------------------------  |  Nome do Jogador #1:            \n");
         printf("0 |<+>|   |   |   |   |   |   |   |   |   |  |  [%s]\n", jogadorAtual.nome);
-        printf("  -----------------------------------------  |                                 \n");
+        printf("  |---|---|---|---|---|---|---|---|---|---|  |                                 \n");
         printf("1 |   |   |   |   |   |   |   |   |   |   |  |  Navios (tamanho):              \n");
         printf("  -----------------------------------------  |  1. %s (%d blocos)\n", navios[0].nome, navios[0].colocados[jogadorAtual.jogador_id]);
         printf("2 |   |   |   |   |   |   |   |   |   |   |  |  2. %s (%d blocos)\n", navios[1].nome, navios[1].colocados[jogadorAtual.jogador_id]);
@@ -339,7 +362,7 @@ int capturarMenu ()
     if (menuPosicao < 1){ menuPosicao = 5; }
     if (menuPosicao > 5){ menuPosicao = 1; }
 
-    desenharTela(telaAtual, menuPosicao, 0, NULL);
+    desenharTela(telaAtual, menuPosicao, 0);
 
     return 9;
 }
@@ -373,7 +396,7 @@ int definirCampos()
     // Laço para os 2 (dois) jogadores
     for (jogadorAtual.jogador_id = 1; jogadorAtual.jogador_id <= 2; jogadorAtual.jogador_id++) {
         //Coleta nome do jogador
-        desenharTela(2, 0, 0, NULL);
+        desenharTela(2, 0, 0);
         scanf("%s", jogadorAtual.nome);
 
         //Prepara Campo
@@ -395,7 +418,7 @@ int definirCampos()
         jogadorAtual.naviosDisponiveis = naviosTotal;
         jogadorAtual.blocosRestantes = blocosTotal;
 
-        desenharTela(3, 0, 1, NULL);
+        desenharTela(3, 0, 1);
 
         //Recebe o número do navio escolhido
         ehNumero = 0;
@@ -415,7 +438,7 @@ int definirCampos()
         {
             //code
             //aux_delay(1); // Teste de delay
-            desenharTela(3, 0, 1, NULL);
+            desenharTela(3, 0, 1);
         }
 
         system("cls");

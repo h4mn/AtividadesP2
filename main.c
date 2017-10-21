@@ -61,6 +61,7 @@ int menu()
         printf("7. \n");
         printf("8. Teste da nova funcionalidade\n");
         printf("9. teste do meu amor\n");
+        printf("G. Segunda aula de File\n");
         printf("0. Sair\n");
         printf("===========================\n");
         printf("Digite uma opção [1 - 0]: ");
@@ -91,6 +92,9 @@ int menu()
         case '7':
         case '8':
             testa_isNumber();
+            break;
+        case 'G':
+            aula_file2();
             break;
         case '9':
             //teste();

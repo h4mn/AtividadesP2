@@ -1,9 +1,9 @@
-BATALHA NAVAL - Preparação                                 Blocos restantes: 30 
+﻿BATALHA NAVAL - Preparação                                 Blocos restantes: 30 
 ===============================================================================
     0   1   2   3   4   5   6   7   8   9                                     
   -----------------------------------------  |  Nome do Jogador #1:           
 0 |<+>|   |   |   |   |   |   |   |   |   |  |  [Fulanito____________]                    
-  -----------------------------------------  |                                
+  |---|------------------------------------  |                                
 1 |   |   |   |   |   |   |   |   |   |   |  |  Navios (tamanho):
   -----------------------------------------  |  1. Submarino (2 blocos)
 2 |   |   |   |   |   |   |   |   |   |   |  |  2. Contratorpedeiro (3 blocos)
@@ -23,3 +23,5 @@ BATALHA NAVAL - Preparação                                 Blocos restantes: 3
 9 |   |   |   |   |   |   |   |   |   |   |
   -----------------------------------------
 _
+
+201710211144 - Modificado por Adriano (Desenho da coluna)
