@@ -45,6 +45,9 @@
 		<Unit filename="src/aula_20170928.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="src/aula_file2.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="src/aula_ponteiros.c">
 			<Option compilerVar="CC" />
 		</Unit>
