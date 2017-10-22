@@ -68,6 +68,11 @@ int menu()
 
         escolha = getchar();
 
+        if (!aux_isNumber(escolha))
+        {
+            strcat(escolha, strupr(escolha));
+        }
+
         //Beep(666, 300);
 
         switch (escolha) {
